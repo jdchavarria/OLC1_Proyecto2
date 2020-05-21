@@ -1,13 +1,36 @@
 [
   {
-    "tipo": "INSTR_CLASE",
-    "nombre": "myclase",
+    "tipo": "INSTRU_IF",
+    "expresionLogica": {
+      "opera_iz": {
+        "opera_iz": {
+          "tipo": "Val_entero",
+          "valor": 1
+        },
+        "opera_der": {
+          "tipo": "Val_entero",
+          "valor": 2
+        },
+        "tipo": "OP_MAYOR_QUE"
+      },
+      "opera_der": {
+        "opera_iz": {
+          "tipo": "Val_entero",
+          "valor": 3
+        },
+        "opera_der": {
+          "tipo": "Val_entero",
+          "valor": 5
+        },
+        "tipo": "OP_MENOR_QUE"
+      },
+      "tipo": "OP_DOBLE_IGUAL"
+    },
     "instrucciones": {
-      "tipo": "INSTR_MAIN",
-      "instrucciones": {
-        "tipo": "INSTR_DECLA",
-        "identificador": "var",
-        "tipo_dato": "Val_entero"
+      "tipo": "INSTR_IMPRI",
+      "expresionCadena": {
+        "tipo": "Val_String",
+        "valor": "\"Sera incorrecto?\""
       }
     }
   }

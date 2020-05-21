@@ -101,7 +101,7 @@
 /*IMPORT PARA EL DOCUMENTO instrucciones.js DONDE SE ENCUENTRA LAS CONSTANTES QUE RETORNAN DATOS PARA EL AST*/
 
 %{
-	const TIPO_OPEACION = require('./instrucciones').Tipo_Operacion;
+	const TIPO_OPERACION = require('./instrucciones').Tipo_Operacion;
 	const TIPO_VALOR = require('./instrucciones').Tipo_Dato;
 	const instruccionesAPI = require('./instrucciones').instruccionesAPI;
 %}
@@ -130,171 +130,82 @@ instrucciones
 
 
 instruccion
-	: RVOID RMAIN PARIZQ PARDER LLAVIZQ instruccion LLAVDER	{$$=instruccionesAPI.nuevoMain($6);}	
-	| RCLASS IDENTIFICADOR LLAVIZQ instruccion LLAVDER		{$$=instruccionesAPI.nuevoClass($2,$4);}
-	| RINT IDENTIFICADOR lista_decla PTCOMA instruccion    {$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Int);}
-	| RSTRING IDENTIFICADOR lista_decla PTCOMA instruccion  {$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_String);}
-	| RDOUBLE IDENTIFICADOR lista_decla PTCOMA instruccion	{$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Double);}
-	| RCHAR IDENTIFICADOR lista_decla PTCOMA instruccion 	{$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Char);}
-	| RBOOLEAN IDENTIFICADOR lista_decla PTCOMA instruccion	{$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Boolean);}
-	| IDENTIFICADOR lista_decla PTCOMA instruccion			
-	| RIMPORT IDENTIFICADOR PTCOMA instruccion				
-	| RSYSTEM PUNTO ROUT PUNTO RPRINT PARIZQ valor PARDER PTCOMA instruccion	{$$=instruccionesAPI.nuevoImprimir($7);}
-	| RIF PARIZQ condicion PARDER LLAVIZQ instruccion LLAVDER else instruccion
-	| RSWITCH PARIZQ valor PARDER LLAVIZQ casos faltantes LLAVDER instruccion
-	| RFOR PARIZQ dec PTCOMA condicion PTCOMA valor incremento PARDER LLAVIZQ instruccion lista_ciclos LLAVDER instruccion
-	| RWHILE PARIZQ condicion PARDER LLAVIZQ instruccion lista_ciclos LLAVDER instruccion
-	| RDO LLAVIZQ instruccion lista_ciclos LLAVDER RWHILE PARIZQ condicion PARDER PTCOMA instruccion
+	: RVOID RMAIN PARIZQ PARDER LLAVIZQ instrucciones LLAVDER instrucciones	{$$=instruccionesAPI.nuevoMain($6);}	
+	| RCLASS IDENTIFICADOR LLAVIZQ instrucciones LLAVDER  instrucciones		{$$=instruccionesAPI.nuevoClass($2,$4);}
+	| RINT IDENTIFICADOR  PTCOMA  instrucciones  {$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Int);}
+	| RSTRING IDENTIFICADOR  PTCOMA instrucciones  {$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_String);}
+	| RDOUBLE IDENTIFICADOR  PTCOMA instruccion	{$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Double);}
+	| RCHAR IDENTIFICADOR PTCOMA instruccion 	{$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Char);}
+	| RBOOLEAN IDENTIFICADOR  PTCOMA instruccion	{$$=instruccionesAPI.nuevoDeclaracion($2,TIPO_VALOR.Tipo_Boolean);}
+	| IDENTIFICADOR PTCOMA instruccion			
+	| RIMPORT IDENTIFICADOR PTCOMA instruccion 				{$$=instruccionesAPI.nuevoImport($2);}
+	| RSYSTEM PUNTO ROUT PUNTO RPRINT PARIZQ expresion_cadena PARDER PTCOMA	instrucciones {$$=instruccionesAPI.nuevoImprimir($7);}
+	| RIF PARIZQ expresion_logica PARDER LLAVIZQ instruccion LLAVDER instrucciones  {$$=instruccionesAPI.nuevoIf($3, $6);}
+	| RSWITCH PARIZQ expresion_numerica PARDER LLAVIZQ casos  LLAVDER instruccion	{$$=instruccionesAPI.nuevoSwitch($3, $6);}
+	| RFOR PARIZQ IDENTIFICADOR IGUAL expresion_numerica PTCOMA expresion_logica PTCOMA IDENTIFICADOR MAS MAS PARDER LLAVIZQ instruccion LLAVDER instruccion	{$$=instruccionesAPI.nuevoPara($3,$5,$7,$9,$14);}
+	| RWHILE PARIZQ expresion_logica PARDER LLAVIZQ instruccion  LLAVDER instruccion	{$$=instruccionesAPI.nuevoMientras($3, $6);}
+	| RDO LLAVIZQ instruccion LLAVDER RWHILE PARIZQ expresion_logica PARDER PTCOMA instruccion
 	|
-;
-
-lista_decla
-	: COMA IDENTIFICADOR lista_decla
-	| IGUAL valor otra_declaracion
-	| 
-;
-
-otra_declaracion
-	: COMA IDENTIFICADOR lista_decla
-	| 
-;
-
-valor
-	: IDENTIFICADOR agregar mul_div suma_resta
-	| ENTERO  operacion 
-	| DECIMAL operacion
-	| CADENA agregar
-	| PARIZQ compuesto PARDER
-;
-
-agregar
-	: MAS valor agregar
-	| PARIZQ valor llamado PARDER
-	| POTENCIA
-	| 
-;
-
-llamado
-	: COMA valor
-	| 
-;
-
-operacion
-	: ter suma_resta
-;
-
-suma_resta
-	: MAS ter suma_resta
-	| MENOS ter suma_resta
-	| 
-;
-
-ter
-	: terminal mul_div
-;
-
-mul_div
-	: POR terminal mul_div
-	| DIVIDIDO terminal mul_div
-	| 
-;
-
-terminal
-	: PARIZQ  operacion PARDER elevado
-	| ENTERO elevado
-	| DECIMAL elevado
-	| IDENTIFICADOR elevado
-	| 
-;
-compuesto
-	: ENTERO compuesto
-	| MAYQUE compuesto
-	| MENQUE compuesto
-	|
-	
-;
-elevado
-	: POTENCIA
-	|
-;
-condicion
-	: diferente valor operador valor comparadores
-;
-
-operador
-	: IGUAL
-	| DOBLEIG
-	| MAYQUE
-	| MENQUE
-	| MAYIGQUE
-	| MENIGQUE
-	| NOIG
-;
-
-comparadores
-	: AND condicion
-	| OR condicion
-	| 
-;
-
-diferente
-	: NOT
-	| 
-;
-
-else 
-	: RELSE anidado cuerel
-	| 
-;
-
-cuerel
-	:  LLAVIZQ instruccion LLAVDER
-	|
-;
-
-anidado
-	: RIF PARIZQ condicion PARDER LLAVIZQ instruccion LLAVDER else
-	| 
 ;
 
 casos
-	: RCASE valor DOSPTS instruccion detener PTCOMA casos
-	|
+	: casos caso_evaluar
+	{
+		$1.push($2);
+		$$=$1;
+	}
+	| caso_evaluar	{$$=instruccionesAPI.nuevoListaCasos($1);}
 ;
 
-faltantes
-	: RDEFAULT DOSPTS instruccion detener PTCOMA
-	|
+caso_evaluar
+	: RCASE expresion_numerica DOSPTS instruccion
+	{$$=instruccionesAPI.nuevoCaso($2,$4);}
+	| RDEFAULT DOSPTS instruccion
+	{$$=instruccionesAPI.nuevoCasoDef($3);}
 ;
 
-detener
-	: RBREAK
-	|
+operadores
+	: O_MAS	{$$=instruccionesAPI.nuevoOperador(TIPO_OPERACION.SUMA);}
+	| O_MENOS	{$$=instruccionesAPI.nuevoOperador(TIPO_OPERACION.RESTA);}
+	| O_POR		{$$=instruccionesAPI.nuevoOperador(TIPO_OPERACION.MULTIPLICACION);}
+	| O_DIVIDIDO	{$$=instruccionesAPI.nuevoOperador(TIPO_OPERACION.DIVISION);}
+;
+expresion_numerica
+	: expresion_numerica MAS expresion_numerica		{$$=instruccionesAPI.nuevoOperacionBinaria($1,$3,TIPO_OPERACION.SUMA);}
+	| expresion_numerica MENOS expresion_numerica	{$$=instruccionesAPI.nuevoOperacionBinaria($1,$3,TIPO_OPERACION.RESTA);}
+	| expresion_numerica POR expresion_numerica		{$$=instruccionesAPI.nuevoOperacionBinaria($1,$3,TIPO_OPERACION.MULTIPLICACION);}
+	| expresion_numerica DIVIDIDO expresion_numerica	{$$=instruccionesAPI.nuevoOperacionBinaria($1,$3,TIPO_OPERACION.DIVISION);}
+	| PARIZQ expresion_numerica PARDER		{$$=$2;}
+	| ENTERO				{$$=instruccionesAPI.nuevoValor(Number($1),TIPO_VALOR.Tipo_Int);}
+	| DECIMAL				{$$=instruccionesAPI.nuevoValor(Number($1),TIPO_VALOR.Tipo_Double);}
+	| IDENTIFICADOR			{$$=instruccionesAPI.nuevoValor($1,TIPO_VALOR.Tipo_String);}
+	| CADENA				{$$=instruccionesAPI.nuevoValor($1,TIPO_VALOR.Tipo_String);}
+	| expresion_relacional {$$=$1;}
 ;
 
-dec
-	: sel_tipo IDENTIFICADOR IGUAL valor 
+expresion_cadena
+	: expresion_cadena MAS expresion_cadena	{$$=instruccionesAPI.nuevoOperacionBinaria($1,$3,TIPO_OPERACION.CONCATENACION);}
+	| CADENA								{$$=instruccionesAPI.nuevoValor($1,TIPO_VALOR.Tipo_String);}
+	| expresion_numerica					{$$=$1;}
 ;
 
-sel_tipo
-	: RINT
-	| RSTRING
-	| RDOUBLE
-	| RBOOLEAN
-	| RCHAR
-	| 
+expresion_relacional
+	: expresion_numerica MAYQUE expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MAYOR_QUE); }
+	| expresion_numerica MENQUE expresion_numerica		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MENOR_QUE); }
+	| expresion_numerica MAYIGQUE expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MAYOR_IGUAL); }
+	| expresion_numerica MENIGQUE expresion_numerica	{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.MENOR_IGUAL); }
+	| expresion_cadena DOBLEIG expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.DOBLE_IGUAL); }
+	| expresion_cadena NOIG expresion_cadena			{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.NO_IGUAL); }
 ;
 
-incremento
-	: MAS MAS
-	| MENOS MENOS
+expresion_logica
+	: expresion_relacional AND expresion_relacional		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.AND);}
+	| expresion_relacional OR expresion_relacional		{ $$ = instruccionesAPI.nuevoOperacionBinaria($1, $3, TIPO_OPERACION.OR);}
+	| NOT expresion_relacional			{$$=instruccionesAPI.nuevoOperacionUnaria($2,TIPO_OPERACION.NOT);}
+	| expresion_relacional				{$$=$1;}
 ;
 
-lista_ciclos
-	: RBREAK PTCOMA
-	| RCONTINUE PTCOMA
-	| 
-;
+
 
 
 
