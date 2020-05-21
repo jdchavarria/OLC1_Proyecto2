@@ -1,0 +1,6 @@
+class myclase{
+void main(){
+    int var = 10;
+}
+}
+    

@@ -1,0 +1,14 @@
+[
+  {
+    "tipo": "INSTR_CLASE",
+    "nombre": "myclase",
+    "instrucciones": {
+      "tipo": "INSTR_MAIN",
+      "instrucciones": {
+        "tipo": "INSTR_DECLA",
+        "identificador": "var",
+        "tipo_dato": "Val_entero"
+      }
+    }
+  }
+]
