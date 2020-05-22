@@ -1,6 +1,9 @@
-class myclase{
-void main(){
-    int var = 10;
-}
-}
+
+if((1>2) == (3<5)){
+         System.out.print("Sera incorrecto?");
+         int var;
+         String var1;
+         int var2;
+         System.out.print("tendria que salir");
+    }
     

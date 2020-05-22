@@ -22,7 +22,8 @@ const Tipo_Operacion={
     NO_IGUAL: 'OP_NO_IGUAL',
     AND: 'OP_AND',
     OR: 'OP:OR',
-    NOT: 'OP_NOT'
+    NOT: 'OP_NOT',
+    CONCATENACION:  'OP_CONCATENACION'
 };
 
 //TIPO DE INSTRUCCIONES
@@ -47,7 +48,7 @@ const TIPO_OPCION_SWITCH={
     DEFECTO: 'DEFECTO'
 }
     // OPEACION PARA CONCATENAR LAS OPERACIONES
-function nueva_operacion(opera_iz,opera_der,tipo){
+function nuevaOperacion(opera_iz,opera_der,tipo){
     return {
         opera_iz:opera_iz,
         opera_der:opera_der,
@@ -125,11 +126,13 @@ const instruccionesAPI={
 
     //CREA OBJETOS IF
     nuevoIf:function(expresionLogica,instrucciones){
+        console.log(expresionLogica);
+        console.log(instrucciones);
         return{
             tipo: Tipo_Instruccion.IF,
             expresionLogica: expresionLogica,
             instrucciones:instrucciones
-        }
+        };
     },
     //CREA OBJETOS IF ANIDADO
     nuevoIfElse:function(expresionLogica,instruccionesIfVerdadero,instruccionesIfFalso){
@@ -140,6 +143,40 @@ const instruccionesAPI={
             instruccionesIfFalso: instruccionesIfFalso
         }
     },
+
+    nuevoSwitch: function(expresionNumerica, casos) {
+		return {
+			tipo: Tipo_Instruccion.SWITCH,
+			expresionNumerica: expresionNumerica,
+			casos: casos
+		}
+    },
+    
+    nuevoListaCasos: function (caso) {
+		var casos = []; 
+		casos.push(caso);
+		return casos;
+    },
+
+    nuevoCaso: function(expresionNumerica, instrucciones) {
+		return {
+			tipo: TIPO_OPCION_SWITCH.CASO,
+			expresionNumerica: expresionNumerica,
+			instrucciones: instrucciones
+		}
+	},
+    
+    nuevoCasoDef: function(instrucciones) {
+		return {
+			tipo: TIPO_OPCION_SWITCH.DEFECTO,
+			instrucciones: instrucciones
+		}
+    },
+    
+    nuevoOperador: function(operador){
+		return operador 
+	},
+
     //RETORNA OBJETO MAIN
     nuevoMain:function(instrucciones){
         return{
@@ -153,6 +190,13 @@ const instruccionesAPI={
             tipo: Tipo_Instruccion.CLASE,
             nombre: name,
             instrucciones: instrucciones
+        }
+    },
+
+    nuevoImport:function(name){
+        return{
+            tipo: Tipo_Instruccion.IMPORT,
+            nombre: name
         }
     }
     
