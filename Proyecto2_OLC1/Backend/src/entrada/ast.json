@@ -1,0 +1,517 @@
+{
+  "imports": [
+    {
+      "import": "imp1"
+    },
+    {
+      "import": "imp2"
+    },
+    {
+      "import": "imp3"
+    }
+  ],
+  "class": {
+    "nombreClase": "entradaCompleta",
+    "contenidoClase": [
+      {
+        "nombreMetodo": "metodo",
+        "tipo": "int",
+        "parametrosMetodo": [
+          {
+            "tipo": "int",
+            "identificador": "a"
+          },
+          {
+            "tipo": "int",
+            "identificador": "d"
+          }
+        ],
+        "contenidoMetodo": [
+          {
+            "declaracion": {
+              "tipo": "int",
+              "identificadores": [
+                {
+                  "identificador": "a"
+                },
+                {
+                  "identificador": "b"
+                },
+                {
+                  "identificador": "c"
+                }
+              ]
+            }
+          },
+          {
+            "declaracion": {
+              "tipo": "int",
+              "identificadores": [
+                {
+                  "identificador": "a",
+                  "valor": "1"
+                },
+                {
+                  "identificador": "b"
+                },
+                {
+                  "identificador": "c",
+                  "valor": "2"
+                }
+              ]
+            }
+          },
+          {
+            "declaracion": {
+              "tipo": "String",
+              "identificadores": [
+                {
+                  "identificador": "s",
+                  "valor": "sdaa\\'\\\""
+                }
+              ]
+            }
+          },
+          {
+            "declaracion": {
+              "tipo": "int",
+              "identificadores": [
+                {
+                  "identificador": "prueba"
+                },
+                {
+                  "identificador": "prueba1"
+                }
+              ]
+            }
+          },
+          {
+            "println": []
+          },
+          {
+            "declaracion": {
+              "tipo": "int",
+              "identificadores": [
+                {
+                  "identificador": "prueba2",
+                  "valor": "2+3*3+(3*3)"
+                }
+              ]
+            }
+          },
+          {
+            "print": "\\n"
+          },
+          {
+            "declaracion": {
+              "tipo": "int",
+              "identificadores": [
+                {
+                  "identificador": "prueba3"
+                }
+              ]
+            }
+          },
+          {
+            "asignacion": {
+              "identificador": "prueba2",
+              "valor": "2"
+            }
+          }
+        ]
+      },
+      {
+        "nombreMetodo": "main",
+        "tipo": "void",
+        "parametrosMetodo": [],
+        "contenidoMetodo": [
+          {
+            "declaracion": {
+              "tipo": "String",
+              "identificadores": [
+                {
+                  "identificador": "cadena"
+                }
+              ]
+            }
+          },
+          {
+            "llamadaMetodo": {
+              "identificadorMetodo": "metodo2",
+              "parametros": []
+            }
+          },
+          {
+            "declaracion": {
+              "tipo": "char",
+              "identificadores": [
+                {
+                  "identificador": "b",
+                  "valor": "2"
+                }
+              ]
+            }
+          },
+          {
+            "print": []
+          },
+          {
+            "switch": {
+              "condicion": "nuevo",
+              "sentenciasCase": [
+                {
+                  "expresion": "1",
+                  "sentencias": [
+                    {
+                      "asignacion": {
+                        "identificador": "a",
+                        "valor": "2"
+                      }
+                    },
+                    {
+                      "declaracion": {
+                        "tipo": "String",
+                        "identificadores": [
+                          {
+                            "identificador": "w",
+                            "valor": "as"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "declaracion": {
+                        "tipo": "int",
+                        "identificadores": [
+                          {
+                            "identificador": "b"
+                          },
+                          {
+                            "identificador": "c"
+                          },
+                          {
+                            "identificador": "d"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "expresion": "2",
+                  "sentencias": [
+                    {
+                      "do": {
+                        "sentencias": [
+                          {
+                            "asignacion": {
+                              "identificador": "numero",
+                              "valor": "10"
+                            }
+                          },
+                          {
+                            "asignacion": {
+                              "identificador": "digitos",
+                              "valor": "digitos + 1"
+                            }
+                          }
+                        ],
+                        "while": "numero>0"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "default": {
+                "sentencias": [
+                  {
+                    "if": {
+                      "condicion": "true",
+                      "sentencias": [
+                        {
+                          "print": []
+                        },
+                        "break"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "nombreMetodo": "metodo2",
+        "tipo": "String",
+        "parametrosMetodo": [
+          {
+            "tipo": "double",
+            "identificador": "b"
+          }
+        ],
+        "contenidoMetodo": [
+          {
+            "asignacion": {
+              "identificador": "a",
+              "valor": "a + 1"
+            }
+          },
+          {
+            "llamadaMetodo": {
+              "identificadorMetodo": "metodo",
+              "parametros": [
+                "a",
+                "b"
+              ]
+            }
+          },
+          {
+            "if": {
+              "condicion": "true",
+              "sentencias": [
+                {
+                  "print": []
+                },
+                {
+                  "if": {
+                    "condicion": "false",
+                    "sentencias": [
+                      {
+                        "asignacion": {
+                          "identificador": "b",
+                          "valor": "hola"
+                        }
+                      }
+                    ]
+                  },
+                  "else": [
+                    {
+                      "declaracion": {
+                        "tipo": "int",
+                        "identificadores": [
+                          {
+                            "identificador": "a",
+                            "valor": "2"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "else": {
+              "if": {
+                "condicion": "adios",
+                "sentencias": [
+                  {
+                    "print": "adios+2"
+                  },
+                  {
+                    "println": "adios+2*!no"
+                  }
+                ]
+              },
+              "else": [
+                {
+                  "declaracion": {
+                    "tipo": "int",
+                    "identificadores": [
+                      {
+                        "identificador": "a",
+                        "valor": "2"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "return": "adios"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "nombreMetodo": "casiCompleto",
+        "tipo": "void",
+        "parametrosMetodo": [],
+        "contenidoMetodo": [
+          {
+            "for": {
+              "initializer": {
+                "tipo": "int",
+                "identificador": "i",
+                "valor": "0"
+              },
+              "condicion": "i<5",
+              "iterator": {
+                "identificador": "i",
+                "valor": "i + 1"
+              },
+              "sentencias": [
+                {
+                  "switch": {
+                    "condicion": "nuevo",
+                    "sentenciasCase": [
+                      {
+                        "expresion": "1",
+                        "sentencias": [
+                          {
+                            "asignacion": {
+                              "identificador": "a",
+                              "valor": "2"
+                            }
+                          },
+                          {
+                            "declaracion": {
+                              "tipo": "String",
+                              "identificadores": [
+                                {
+                                  "identificador": "w",
+                                  "valor": "as"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "declaracion": {
+                              "tipo": "int",
+                              "identificadores": [
+                                {
+                                  "identificador": "b"
+                                },
+                                {
+                                  "identificador": "c"
+                                },
+                                {
+                                  "identificador": "d"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "do": {
+                              "sentencias": [
+                                {
+                                  "asignacion": {
+                                    "identificador": "a",
+                                    "valor": "a + 1"
+                                  }
+                                },
+                                {
+                                  "if": {
+                                    "condicion": "a==10",
+                                    "sentencias": [
+                                      {
+                                        "asignacion": {
+                                          "identificador": "a",
+                                          "valor": "20"
+                                        }
+                                      },
+                                      "break"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "while": "a!=0"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "expresion": "2",
+                        "sentencias": [
+                          {
+                            "if": {
+                              "condicion": "true",
+                              "sentencias": [
+                                {
+                                  "print": []
+                                },
+                                {
+                                  "if": {
+                                    "condicion": "false",
+                                    "sentencias": [
+                                      {
+                                        "asignacion": {
+                                          "identificador": "b",
+                                          "valor": "hola"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "else": [
+                                    {
+                                      "declaracion": {
+                                        "tipo": "int",
+                                        "identificadores": [
+                                          {
+                                            "identificador": "a",
+                                            "valor": "2"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "else": {
+                              "if": {
+                                "condicion": "adios",
+                                "sentencias": [
+                                  {
+                                    "print": "adios+2"
+                                  },
+                                  {
+                                    "println": "adios+2*!no"
+                                  }
+                                ]
+                              },
+                              "else": [
+                                {
+                                  "declaracion": {
+                                    "tipo": "int",
+                                    "identificadores": [
+                                      {
+                                        "identificador": "a",
+                                        "valor": "2"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "default": {
+                      "sentencias": [
+                        {
+                          "if": {
+                            "condicion": "true",
+                            "sentencias": [
+                              {
+                                "print": []
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "return": ""
+          }
+        ]
+      }
+    ]
+  }
+}
